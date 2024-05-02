@@ -46,7 +46,7 @@
 
                     <div class="logo-block">
                         <a id="hamburger-menu-icon" class="open-main-menu">
-                            <div class="header--hamburger header--hamburger-dims"><img src="{{asset('static/images/bar.png')}}" width="36px" height="36px"> </div>
+                            <div class="header--hamburger header--hamburger-dims"><img src="{{asset('static/images/menu.png')}}" width="36" height="36" class="pranta-menu-icon"> </div>
                         </a>
 
                         <a href="/" class="logo">
@@ -151,7 +151,7 @@
                     <div class="user-block">
                         <a href="/userarea/favorites" class="tooltip favorite" data-tooltip="Favorites">
                             <div>
-                                <div class="header--favorite header--favorite-dims"></div>
+                                <div class="header--favorite header--favorite-dims"> <img src="{{asset('static/images/heart.png')}}" alt="" srcset=""></div>
                             </div>
                         </a>
                         <a class="tooltip add" data-tooltip="List" id="list-with-us-button">

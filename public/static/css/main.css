@@ -5,3 +5,7 @@
 .v9_ready .site-header .menu-block {
     background-color: #422F7E;
 }
+
+.header--hamburger{
+    padding-right: 8px;
+}
