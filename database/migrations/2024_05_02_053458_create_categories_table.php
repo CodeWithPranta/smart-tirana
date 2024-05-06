@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Category;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,8 +16,10 @@ return new class extends Migration
             $table->id();
             $table->string('image');
             $table->string('name');
+            $table->integer('parent_id')->unsigned()->nullable();
             $table->string('slug')->unique();
-
+            $table->text('details')->nullable();
+            $table->boolean('is_visible')->default(true);
             $table->timestamps();
         });
     }
