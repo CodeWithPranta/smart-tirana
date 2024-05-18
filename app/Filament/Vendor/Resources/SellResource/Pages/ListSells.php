@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\TemplateResource\Pages;
+namespace App\Filament\Vendor\Resources\SellResource\Pages;
 
-use App\Filament\Resources\TemplateResource;
+use App\Filament\Vendor\Resources\SellResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
-class ListTemplates extends ListRecords
+class ListSells extends ListRecords
 {
-    protected static string $resource = TemplateResource::class;
+    protected static string $resource = SellResource::class;
 
     protected function getHeaderActions(): array
     {

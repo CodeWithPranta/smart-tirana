@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Filament\Resources;
+namespace App\Filament\Vendor\Resources;
 
-use App\Filament\Resources\TemplateResource\Pages;
-use App\Filament\Resources\TemplateResource\RelationManagers;
-use App\Models\Template;
+use App\Filament\Vendor\Resources\JobPostResource\Pages;
+use App\Filament\Vendor\Resources\JobPostResource\RelationManagers;
+use App\Models\JobPost;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,22 +13,18 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class TemplateResource extends Resource
+class JobPostResource extends Resource
 {
-    protected static ?string $model = Template::class;
+    protected static ?string $model = JobPost::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-clipboard';
+    protected static ?string $navigationIcon = 'heroicon-o-newspaper';
+    protected static ?string $navigationGroup = 'Listings';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('theme')
-                    ->required()
-                    ->maxLength(255),
+                //
             ]);
     }
 
@@ -36,10 +32,6 @@ class TemplateResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('theme')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -72,9 +64,9 @@ class TemplateResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListTemplates::route('/'),
-            'create' => Pages\CreateTemplate::route('/create'),
-            'edit' => Pages\EditTemplate::route('/{record}/edit'),
+            'index' => Pages\ListJobPosts::route('/'),
+            'create' => Pages\CreateJobPost::route('/create'),
+            'edit' => Pages\EditJobPost::route('/{record}/edit'),
         ];
     }
 }

@@ -64,10 +64,6 @@ class User extends Authenticatable implements FilamentUser
         {
             return true;
 
-        } elseif ($panel->getId() === 'app' && $this->user_type === 'general')
-        {
-            return true;
-
         }
 
         return false;

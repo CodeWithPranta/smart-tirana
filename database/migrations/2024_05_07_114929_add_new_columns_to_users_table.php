@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('image')->nullable();
             $table->string('phone')->unique()->nullable();
-            $table->enum('user_type', ['admin', 'advertiser', 'general'])->default('general');
+            $table->enum('user_type', ['admin', 'advertiser'])->default('advertiser');
             $table->longText('details')->nullable();
             $table->json('links')->nullable();
         });
