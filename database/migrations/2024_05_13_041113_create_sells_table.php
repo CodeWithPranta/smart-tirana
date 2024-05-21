@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('model_name');
             $table->longText('description');
             $table->string('pick_up_location');
-            $table->decimal('sales_price', 2);
-            $table->decimal('original_price', 2);
+            $table->decimal('sales_price', 10);
+            $table->decimal('original_price', 10);
             $table->string('purchased_time')->nullable();
             $table->timestamps();
         });

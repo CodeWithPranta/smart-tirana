@@ -8,6 +8,7 @@ use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements FilamentUser
@@ -52,6 +53,11 @@ class User extends Authenticatable implements FilamentUser
             'password' => 'hashed',
             'links' => 'array',
         ];
+    }
+
+    public function listings(): HasMany
+    {
+        return $this->hasMany(Listing::class);
     }
 
     public function canAccessPanel(Panel $panel): bool

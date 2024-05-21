@@ -2,30 +2,80 @@
 
 namespace App\Filament\Vendor\Resources;
 
-use App\Filament\Vendor\Resources\SellResource\Pages;
-use App\Filament\Vendor\Resources\SellResource\RelationManagers;
-use App\Models\Sell;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
+use App\Models\Sell;
 use Filament\Tables;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
+use Filament\Facades\Filament;
+use Filament\Resources\Resource;
+use Illuminate\Support\Facades\Auth;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Vendor\Resources\SellResource\Pages;
+use App\Filament\Vendor\Resources\SellResource\RelationManagers;
+use App\Models\Listing;
 
 class SellResource extends Resource
 {
     protected static ?string $model = Sell::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-banknotes';
-
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
     protected static ?string $navigationGroup = 'Listings';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                //
+                Select::make('listing_id')
+                    ->label('Assign Basic Listing')
+                    ->relationship('listing', 'title')
+                    ->unique(ignoreRecord:true)
+                    ->options(
+                        Listing::where('user_id', Filament::auth()->user()->id)->pluck('title', 'id'),
+                    )
+                    ->required()
+                    ->searchable()
+                    ->preload()
+                    ->createOptionForm([
+                        TextInput::make('title')
+                            ->required(),
+                        Select::make('category_id')
+                            ->relationship('category', 'name')
+                            ->required(),
+                        TextInput::make('user_id')
+                            ->default(Filament::auth()->user()->id)
+                            ->required()
+                            ->readOnly(),
+                    ]),
+                Forms\Components\Select::make('type')
+                    ->options([
+                        'used' => 'Used Product',
+                        'new' => 'New Product',
+                    ])
+                    ->required(),
+                Forms\Components\TextInput::make('short_product_name')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('model_name')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\RichEditor::make('description')
+                    ->required()
+                    ->columnSpanFull(),
+                Forms\Components\TextInput::make('pick_up_location')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('sales_price')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\TextInput::make('original_price')
+                    ->required()
+                    ->numeric(),
+                Forms\Components\TextInput::make('purchased_time')
+                    ->maxLength(255),
             ]);
     }
 
@@ -33,6 +83,25 @@ class SellResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('listing.id')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('type')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('short_product_name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('model_name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('pick_up_location')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('sales_price')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('original_price')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('purchased_time')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
