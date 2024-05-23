@@ -5,6 +5,8 @@ namespace App\Filament\Vendor\Resources;
 use Filament\Forms;
 use App\Models\Sell;
 use Filament\Tables;
+use App\Models\Listing;
+use App\Models\Category;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Facades\Filament;
@@ -12,11 +14,12 @@ use Filament\Resources\Resource;
 use Illuminate\Support\Facades\Auth;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\FileUpload;
 use Illuminate\Database\Eloquent\Builder;
+use CodeWithDennis\FilamentSelectTree\SelectTree;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Vendor\Resources\SellResource\Pages;
 use App\Filament\Vendor\Resources\SellResource\RelationManagers;
-use App\Models\Listing;
 
 class SellResource extends Resource
 {
@@ -44,6 +47,10 @@ class SellResource extends Resource
                             ->required(),
                         Select::make('category_id')
                             ->relationship('category', 'name')
+                            ->options(
+                                Category::where('parent_id', Category::where('slug', 'buy-sell')->first()->id)
+                                        ->pluck('name', 'id')
+                            )
                             ->required(),
                         TextInput::make('user_id')
                             ->default(Filament::auth()->user()->id)
@@ -59,6 +66,10 @@ class SellResource extends Resource
                 Forms\Components\TextInput::make('short_product_name')
                     ->required()
                     ->maxLength(255),
+                FileUpload::make('attachments')
+                    ->multiple()
+                    ->columnSpanFull()
+                    ->required(),
                 Forms\Components\TextInput::make('model_name')
                     ->required()
                     ->maxLength(255),

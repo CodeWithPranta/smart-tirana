@@ -28,4 +28,10 @@ class Listing extends Model
     {
         return $this->hasOne(Sell::class);
     }
+
+    public function jobPost(): HasOne
+    {
+        return $this->hasOne(JobPost::class);
+    }
+
 }

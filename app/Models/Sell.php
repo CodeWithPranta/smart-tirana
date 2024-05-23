@@ -20,6 +20,11 @@ class Sell extends Model
         'sales_price',
         'original_price',
         'purchased_time',
+        'attachments',
+    ];
+
+    protected $casts = [
+        'attachments' => 'array',
     ];
 
     public function listing(): BelongsTo
