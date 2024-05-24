@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 @section('content')
 <div class="signin-page lightboxable">
     <div class="header">
@@ -46,7 +46,7 @@
 
                     <div class="logo-block">
                         <a id="hamburger-menu-icon" class="open-main-menu">
-                            <div class="header--hamburger header--hamburger-dims"><img src="{{asset('static/images/menu.png')}}" width="36" height="36" class="pranta-menu-icon"> </div>
+                            <div class="header--hamburger header--hamburger-dims"></div>
                         </a>
 
                         <a href="/" class="logo">
