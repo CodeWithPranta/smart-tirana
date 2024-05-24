@@ -1,45 +1,8 @@
 @extends('layouts.main')
 @section('content')
-<div class="signin-page lightboxable">
-    <div class="header">
-        <div class="badge"></div>
-        <h1>Sign In</h1>
-        <div class="close">X</div>
-    </div>
-
-    <div class="error">
-
-    </div>
-
-    <form action="https://www.smartshanghai.com/signin/" method="POST">
-        <input type="text" name="emailaddress" placeholder="E-mail address or username">
-        <input type="password" name="password" placeholder="Password">
-        <input type="submit" value="Sign in">
-        <input type="hidden" value="" name="origin"/>
-    </form>
-
-    <ul class="meta">
-        <li>
-            <a href="https://www.smartshanghai.com/register">
-                <h2>Not registered yet? Signing up is easy!</h2>
-                <p>As a member you can manage your favorite spots around town, upload housing ads, write reviews and more.</p>
-            </a>
-        </li>
-        <li>
-            <a href="https://www.smartshanghai.com/resetpassword">
-                <h2>Forgot your password?</h2>
-                <p>If you forgot your account password you might need to reset it.</p>
-            </a>
-        </li>
-    </ul>
-</div>
 
         <div class="v9_ready homepage header">
         <div class="site-header" id="site-header-app-bind" style="background: #f9f9f9;">
-
-
-
-
 
             <div class="main-block">
                 <div class="page-column ">
@@ -151,7 +114,7 @@
                     <div class="user-block">
                         <a href="/userarea/favorites" class="tooltip favorite" data-tooltip="Favorites">
                             <div>
-                                <div class="header--favorite header--favorite-dims"> <img src="{{asset('static/images/heart.png')}}" alt="" srcset=""></div>
+                                <div class="header--favorite header--favorite-dims"></div>
                             </div>
                         </a>
                         <a class="tooltip add" data-tooltip="List" id="list-with-us-button">
@@ -160,7 +123,7 @@
                             </div>
                         </a>
 
-                                                    <a href="/signin" class="avatar-container tooltip" data-tooltip="Account">
+                            <a href="{{route('register')}}" class="avatar-container tooltip" data-tooltip="Account">
                                 <div class="avatar">
                                     <img class="avatar" src="https://static.smartshanghai.com/img/icons/svg/icon-profile.svg" alt="User avatar image" style="margin: auto;">
                                 </div>

@@ -34,4 +34,9 @@ class Listing extends Model
         return $this->hasOne(JobPost::class);
     }
 
+    public function venue(): HasOne
+    {
+        return $this->hasOne(Venue::class);
+    }
+
 }

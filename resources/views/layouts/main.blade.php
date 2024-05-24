@@ -3,14 +3,16 @@
 <head prefix="og: http://ogp.me/ns#">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title> Curated, Opinionated Shanghai Living | SmartShanghai</title>
+    <title> Curated, Opinionated Tirana Living | SmartTirana</title>
 
-                <link rel="stylesheet" type="text/css" href="https://static.smartshanghai.com/css/smartshanghai.min.1716301693.css">
+    <link rel="stylesheet" type="text/css" href="https://static.smartshanghai.com/css/smartshanghai.min.1716301693.css">
     <link rel="stylesheet" type="text/css" href="https://static.smartshanghai.com/css/smartshanghai_v8.min.1716301691.css">
+    <link rel="stylesheet" type="text/css" href="{{asset('static/css/main.css')}}">
+
     <link rel="icon" type="image/png" href="https://static.smartshanghai.com/img/favicon.png">
     <link rel="icon" type="image/x-icon" href="https://static.smartshanghai.com/img/favicon.ico">
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-35757037-1"></script>
+
     <script type="text/javascript" src="https://static.smartshanghai.com/js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="https://static.smartshanghai.com/js/vendor.min.1716301698.js"></script>
     <script type="text/javascript" src="https://static.smartshanghai.com/js/javascripts.min.1709740003.js"></script>
