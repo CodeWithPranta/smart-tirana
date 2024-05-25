@@ -39,4 +39,9 @@ class Listing extends Model
         return $this->hasOne(Venue::class);
     }
 
+    public function event(): HasOne
+    {
+        return $this->hasOne(Event::class);
+    }
+
 }

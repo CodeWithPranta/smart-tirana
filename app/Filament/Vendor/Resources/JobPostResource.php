@@ -44,10 +44,13 @@ class JobPostResource extends Resource
                         ->required(),
                     Select::make('category_id')
                         ->relationship('category', 'name')
-                        ->options(
-                            Category::where('parent_id', Category::where('slug', 'jobs')->first()->id)
-                                    ->pluck('name', 'id')
-                        )
+                        ->options(function () {
+                            $parentCategory = Category::where('slug', 'jobs')->first();
+                            if ($parentCategory) {
+                                return Category::where('parent_id', $parentCategory->id)->pluck('name', 'id');
+                            }
+                            return [];
+                        })
                         ->required(),
                     TextInput::make('user_id')
                         ->default(Filament::auth()->user()->id)

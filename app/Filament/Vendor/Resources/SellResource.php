@@ -27,6 +27,7 @@ class SellResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-banknotes';
     protected static ?string $navigationGroup = 'Listings';
+    protected static ?string $navigationLabel = 'Buy & Sell';
 
     public static function form(Form $form): Form
     {
@@ -47,10 +48,13 @@ class SellResource extends Resource
                             ->required(),
                         Select::make('category_id')
                             ->relationship('category', 'name')
-                            ->options(
-                                Category::where('parent_id', Category::where('slug', 'buy-sell')->first()->id)
-                                        ->pluck('name', 'id')
-                            )
+                            ->options(function () {
+                                $parentCategory = Category::where('slug', 'buy-sell')->first();
+                                if ($parentCategory) {
+                                    return Category::where('parent_id', $parentCategory->id)->pluck('name', 'id');
+                                }
+                                return [];
+                            })
                             ->required(),
                         TextInput::make('user_id')
                             ->default(Filament::auth()->user()->id)

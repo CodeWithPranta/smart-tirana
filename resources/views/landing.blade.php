@@ -123,7 +123,7 @@
                             </div>
                         </a>
 
-                            <a href="{{route('register')}}" class="avatar-container tooltip" data-tooltip="Account">
+                            <a href="{{route('login')}}" class="avatar-container tooltip" data-tooltip="Account">
                                 <div class="avatar">
                                     <img class="avatar" src="https://static.smartshanghai.com/img/icons/svg/icon-profile.svg" alt="User avatar image" style="margin: auto;">
                                 </div>
