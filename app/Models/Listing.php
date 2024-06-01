@@ -44,4 +44,9 @@ class Listing extends Model
         return $this->hasOne(Event::class);
     }
 
+    public function housing(): HasOne
+    {
+        return $this->hasOne(Housing::class);
+    }
+
 }
