@@ -33,7 +33,6 @@ class HousingResource extends Resource
                     ->label('Assign Basic Listing')
                     ->relationship('listing', 'title')
                     ->unique(ignoreRecord:true)
-                    ->columnSpanFull()
                     ->options(
                         Listing::where('user_id', Filament::auth()->user()->id)->pluck('title', 'id'),
                     )
@@ -58,6 +57,9 @@ class HousingResource extends Resource
                             ->required()
                             ->readOnly(),
                     ]),
+                TextInput::make('ads_title')
+                   ->maxLength(500)
+                   ->required(),
                 Forms\Components\Radio::make('property_type')
                     ->options([
                         'Offices for rent' => 'Offices for rent',
@@ -77,7 +79,7 @@ class HousingResource extends Resource
                     ->required(),
                 Forms\Components\TextInput::make('compound_or_building_name')
                     ->maxLength(255),
-                Forms\Components\Textarea::make('basic_information')
+                Forms\Components\RichEditor::make('basic_information')
                     ->required()
                     ->columnSpanFull(),
                 Forms\Components\TextInput::make('floor')
@@ -86,28 +88,54 @@ class HousingResource extends Resource
                 Forms\Components\TextInput::make('size')
                     ->required()
                     ->numeric(),
-                Forms\Components\TextInput::make('main_windows_face_direction')
-                    ->maxLength(255),
                 Forms\Components\TextInput::make('bedrooms')
                     ->required()
                     ->numeric(),
                 Forms\Components\TextInput::make('bathrooms')
                     ->required()
                     ->numeric(),
-                Forms\Components\TextInput::make('photos')
+                Forms\Components\FileUpload::make('photos')
+                    ->image()
+                    ->multiple()
                     ->required(),
-                Forms\Components\TextInput::make('features')
+                Forms\Components\CheckboxList::make('features')
+                    ->options([
+                        '24 hours Aircon' => '24 hours Aircon',
+                        'Bicycle Storage' => 'Bicyle Storage',
+                        'Direct Metro Access' => 'Direct Metro Access',
+                        'High Floors' => 'High Floors',
+                        'Internet Provided' => 'Internet Provided',
+                        'Parking' => 'Parking',
+                        'Registration Available' => 'Registration Available',
+                        'Shared Conference Area' => 'Shared Conference Area',
+                        'Wheelchair Friendly' => 'Wheelchair Friendly',
+                    ])
+                    ->columns(2)
                     ->required(),
                 Forms\Components\TextInput::make('price')
                     ->required()
                     ->numeric()
-                    ->prefix('$'),
-                Forms\Components\TextInput::make('period')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('available_from')
-                    ->required()
-                    ->maxLength(255),
+                    ->prefix('€'),
+                Forms\Components\Select::make('period')
+                    ->options([
+                        'Monthly' => 'Monthly',
+                        'Yearly' => 'Yearly'
+                    ])
+                    ->required(),
+                Forms\Components\Radio::make('available_from')
+                    ->options([
+                        'Now' => 'Now',
+                        'Later' => 'Later',
+                    ])
+                    ->required(),
+                Forms\Components\Radio::make('main_windows_face_direction')
+                    ->options([
+                        'North' => 'North',
+                        'South' => 'South',
+                        'East' => 'East',
+                        'West' => 'West',
+                    ])
+                    ->columns(2),
                 Forms\Components\Textarea::make('location_on_google_map')
                     ->columnSpanFull(),
             ]);
@@ -117,9 +145,8 @@ class HousingResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('listing.title')
-                    ->numeric()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('ads_title')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('property_type')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('owner_status')

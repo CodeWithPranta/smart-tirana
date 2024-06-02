@@ -27,6 +27,7 @@ class Housing extends Model
         'period',
         'available_from',
         'location_on_google_map',
+        'ads_title',
     ];
 
     protected $casts = [
