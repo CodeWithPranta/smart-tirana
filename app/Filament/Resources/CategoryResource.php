@@ -37,6 +37,8 @@ class CategoryResource extends Resource
                 SelectTree::make('parent_id')
                     ->label('Parent Category')
                     ->relationship('parentCategory', 'name', 'parent_id')
+                    ->independent(false)
+                    ->enableBranchNode()
                     ->nullable(),
                 Forms\Components\TextInput::make('slug')
                     ->required()
