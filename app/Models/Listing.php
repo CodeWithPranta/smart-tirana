@@ -49,4 +49,9 @@ class Listing extends Model
         return $this->hasOne(Housing::class);
     }
 
+    public function service(): HasOne
+    {
+        return $this->hasOne(Service::class);
+    }
+
 }
