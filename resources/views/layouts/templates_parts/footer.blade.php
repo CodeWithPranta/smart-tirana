@@ -47,11 +47,9 @@
             NAVIGATE
         </h2>
         <ul>
-            <li><a href="https://www.smartshanghai.com/service/about">About Us</a></li>
-            <li><a href="https://www.smartshanghai.com/contact">Contact Us</a></li>
-            <li><a href="https://www.smartshanghai.com/mediakit">Advertise</a></li>
-            <li><a href="https://www.smartshanghai.com/faq">FAQ</a></li>
-            <li><a href="https://www.smartshanghai.com/privacy">Privacy</a></li>
+            @foreach ($pages as $page)
+            <li><a href="{{route('page-detail', $page->slug)}}">{{$page->title}}</a></li>
+            @endforeach
         </ul>
     </div>
     <div class="get-listed">
