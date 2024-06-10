@@ -32,12 +32,12 @@
 <div class="site-main-column">
     <div class="about-us">
         <div class="logo">
-            <a href="https://www.smartshanghai.com">
-                <div class="footer--smsh-logo-write footer--smsh-logo-write-dims"></div>
+            <a href="https://www.smarttirana.com">
+                <img src="{{asset('static/smattirana-logo.png')}}" alt="">
             </a>
         </div>
         <p>
-            SmartShanghai.com is an independent media publication dedicated to honesty and editorial transparency. We are for Shanghai residents,
+            SmartTirana.com is an independent media publication dedicated to honesty and editorial transparency. We are for Shanghai residents,
             written by a team of long-term, opinionated and knowledgeable writers and editors. We never give an opinion or recommendation that we
             wouldn’t also share with our own friends and family.
         </p>
@@ -108,8 +108,8 @@
     </div>
     <div class="copyright">
         <p>
-            All material is copyright of SmartShanghai.com <br>
-            Made in Shanghai since 2003 | <a href="https://beian.miit.gov.cn" target="_blank">沪ICP备08111777号-9</a>
+            All material is copyright of SmartTirana.com <br>
+            Made in Tirana since 2024 | <a href="https://smarttirana.com" target="_blank">Smart Tirana</a>
         </p>
         <a class="return-top" href="#" title="Return Top"></a>
     </div>

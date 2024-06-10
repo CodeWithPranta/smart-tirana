@@ -9,8 +9,8 @@
     <link rel="stylesheet" type="text/css" href="https://static.smartshanghai.com/css/smartshanghai_v8.min.1716301691.css">
     <link rel="stylesheet" type="text/css" href="{{asset('static/css/main.css')}}">
 
-    <link rel="icon" type="image/png" href="https://static.smartshanghai.com/img/favicon.png">
-    <link rel="icon" type="image/x-icon" href="https://static.smartshanghai.com/img/favicon.ico">
+    <link rel="icon" type="image/png" href="{{asset('static/favicon.png')}}">
+    <link rel="icon" type="image/x-icon" href="{{asset('static/favicon.ico')}}">
 
 
     <script type="text/javascript" src="https://static.smartshanghai.com/js/jquery-2.1.1.min.js"></script>
@@ -159,6 +159,7 @@
     </script>
 </head>
 <body id="mobile-optimize">
+@include('layouts.templates_parts.header')
 @yield('content')
 @include('layouts.templates_parts.footer')
 </body>
