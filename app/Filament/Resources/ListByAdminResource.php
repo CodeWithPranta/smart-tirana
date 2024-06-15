@@ -2,28 +2,29 @@
 
 namespace App\Filament\Resources;
 
+use Filament\Forms;
+use Filament\Tables;
+use App\Models\Listing;
+use App\Models\Category;
+use Filament\Forms\Form;
+use Filament\Tables\Table;
+use App\Models\ListByAdmin;
+use Filament\Facades\Filament;
+use Filament\Resources\Resource;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Illuminate\Database\Eloquent\Builder;
+use CodeWithDennis\FilamentSelectTree\SelectTree;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ListByAdminResource\Pages;
 use App\Filament\Resources\ListByAdminResource\RelationManagers;
-use App\Models\Category;
-use App\Models\ListByAdmin;
-use App\Models\Listing;
-use CodeWithDennis\FilamentSelectTree\SelectTree;
-use Filament\Facades\Filament;
-use Filament\Forms;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
-use Filament\Tables;
-use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ListByAdminResource extends Resource
 {
     protected static ?string $model = ListByAdmin::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-bug-ant';
 
     public static function form(Form $form): Form
     {
@@ -43,8 +44,12 @@ class ListByAdminResource extends Resource
                     TextInput::make('title')
                         ->required(),
                     Select::make('category_id')
-                        ->label('Select Category')
                         ->relationship('category', 'name')
+                        ->options(function () {
+                            return Category::where('parent_id', '!=', null)->pluck('name', 'id');
+                        })
+                        ->searchable()
+                        ->preload()
                         ->required(),
                     TextInput::make('user_id')
                         ->default(Filament::auth()->user()->id)
@@ -54,9 +59,15 @@ class ListByAdminResource extends Resource
                 Forms\Components\TextInput::make('main_title')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('list_details'),
-                Forms\Components\TextInput::make('photos'),
-                Forms\Components\TextInput::make('key_values'),
+                Forms\Components\Repeater::make('list_details')
+                    ->schema([
+                        TextInput::make('title')->required(),
+                        Textarea::make('description')->required(),
+                    ])
+                    ->columnSpanFull(),
+                Forms\Components\FileUpload::make('photos')->image()->multiple()->required()->columnSpanFull(),
+                Forms\Components\KeyValue::make('key_values')
+                ->columnSpanFull(),
                 Forms\Components\Textarea::make('google_map_code')
                     ->columnSpanFull(),
             ]);

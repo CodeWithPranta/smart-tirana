@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ListByAdmin extends Model
 {
@@ -17,4 +18,9 @@ class ListByAdmin extends Model
         'photos' => 'array',
         'key_values' => 'array',
     ];
+
+    public function listing(): BelongsTo
+    {
+        return $this->belongsTo(Listing::class);
+    }
 }

@@ -54,4 +54,9 @@ class Listing extends Model
         return $this->hasOne(Service::class);
     }
 
+    public function listByAdmin(): HasOne
+    {
+        return $this->hasOne(ListByAdmin::class);
+    }
+
 }
