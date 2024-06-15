@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Page;
 use App\Models\Category;
+use App\Models\Listing;
 use Illuminate\Http\Request;
 
 class ListingController extends Controller
@@ -17,6 +18,13 @@ class ListingController extends Controller
         // Get subcategories where parent_id matches the main category ID
         $subCategories = Category::where('parent_id', $category->id)->get();
 
-        return view('categories.main-category', compact('category', 'categories', 'page', 'pages', 'subCategories'));
+        //dd($slug);
+        $listings = Listing::all();
+
+        // if ($slug === 'service'){
+        //     return view('categories.main-category', compact('category', 'categories', 'page', 'pages', 'subCategories', 'listings'));
+        // }
+
+        return view('categories.main-category', compact('category', 'categories', 'page', 'pages', 'subCategories', 'listings'));
     }
 }
