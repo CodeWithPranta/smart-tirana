@@ -19,6 +19,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/category/{slug}', [ListingController::class, 'index'])->name('main.category');
+Route::get('/sub-category/{subSlug}', [ListingController::class, 'subCategory'])->name('sub.category');
 
 Route::get('/page/{slug}', [LandingPageController::class, 'pageDetail'])->name('page-detail');
 require __DIR__.'/auth.php';

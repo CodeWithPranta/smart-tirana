@@ -156,4 +156,14 @@ class ServiceResource extends Resource
             'edit' => Pages\EditService::route('/{record}/edit'),
         ];
     }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $userId = Filament::auth()->user()->id;
+
+        return parent::getEloquentQuery()
+                    ->whereHas('listing', function ($query) use ($userId) {
+                        $query->where('user_id', $userId);
+                    });
+    }
 }
